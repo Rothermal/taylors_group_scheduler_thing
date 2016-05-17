@@ -17,8 +17,8 @@ mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/interviewly
 // require routes
 var index = require('./routes/index');
 var authenticate = require('./routes/authenticate');
-//var forgot = require('./routes/forgot');
-//var reset = require('./routes/reset');
+var forgot = require('./routes/forgot');
+var reset = require('./routes/reset');
 
 // require APIs
 var profile = require('./routes/profile');
@@ -62,13 +62,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // serve clientnpm sta
-app.use(express.static(path.join(__dirname, '..', 'client', 'app')));
+app.use(express.static('client/app'));
 
+app.use('/', index);
+app.use('/authenticate', authenticate);
 // use routes
 
 // use APIs
-app.use('/', index);
-app.use('/authenticate', authenticate);
+app.use('/forgot', forgot);
+app.use('/reset', reset);
+app.use('/api/*', expressJwt({secret: process.env.SECRET || "devsecret"}));
 app.use('/api/profile', profile);
 app.use('/api/interviewer', interviewer);
 app.use('/api/student', student);
@@ -90,45 +93,42 @@ app.use('/api/event/archive', archiveEvent);
 app.use('/api/upload', upload);
 app.use('/api/event/interviewerWeight', interviewerWeight);
 app.use('/api/event/studentWeight', studentWeight);
-//app.use('/forgot', forgot);
-//app.use('/reset', reset);
-app.use('/api/*', expressJwt({secret: process.env.SECRET || "devsecret"}));
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// error handling for unauthorized API requests
-app.use(function(err, req, res, next) {
-  if(err.name === 'UnauthorizedError') {
-    res.status(401).send('invalid token');
-  }
-});
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
+//
+//// catch 404 and forward to error handler
+//app.use(function(req, res, next) {
+//  var err = new Error('Not Found');
+//  err.status = 404;
+//  next(err);
+//});
+//
+//// error handling for unauthorized API requests
+//app.use(function(err, req, res, next) {
+//  if(err.name === 'UnauthorizedError') {
+//    res.status(401).send('invalid token');
+//  }
+//});
+//
+//// development error handler
+//// will print stacktrace
+//if (app.get('env') === 'development') {
+//  app.use(function(err, req, res, next) {
+//    res.status(err.status || 500);
+//    res.render('error', {
+//      message: err.message,
+//      error: err
+//    });
+//  });
+//}
+//
+//// production error handler
+//// no stacktraces leaked to user
+//app.use(function(err, req, res, next) {
+//  res.status(err.status || 500);
+//  res.render('error', {
+//    message: err.message,
+//    error: {}
+//  });
+//});
 
 var server = app.listen(port,function(){
   var port = server.address().port;

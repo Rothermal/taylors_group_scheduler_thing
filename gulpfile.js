@@ -37,23 +37,36 @@ gulp.task('jshint', function() {
 gulp.task('copy-libraries', function() {
     return gulp.src([
         'bower_components/pdfmake/build/pdfmake.min.js',
+        'bower_components/pdfmake/build/pdfmake.min.js.map',
         'bower_components/pdfmake/build/vfs_fonts.js',
         'node_modules/underscore/underscore-min.js',
+        'node_modules/underscore/underscore-min.map',
         'node_modules/moment/min/moment.min.js',
+        'node_modules/moment/min/moment.min.js.map',
         'node_modules/angular/angular.min.js',
+        'node_modules/angular/angular.min.js.map',
         'node_modules/angular-animate/angular-animate.min.js',
+        'node_modules/angular-animate/angular-animate.min.js.map',
         'node_modules/angular-aria/angular-aria.min.js',
+        'node_modules/angular-aria/angular-aria.min.js.map',
         'node_modules/angular-material/angular-material.min.js',
+        'node_modules/angular-material/angular-material.min.js.map',
         'node_modules/angular-material/angular-material.min.css',
         'node_modules/angular-route/angular-route.min.js',
+        'node_modules/angular-route/angular-route.min.js.map',
         'node_modules/angular-messages/angular-messages.min.js',
+        'node_modules/angular-messages/angular-messages.min.js.map',
         'node_modules/angular-ui-grid/ui-grid.min.js',
+        'node_modules/angular-ui-grid/ui-grid.min.js.map',
         'node_modules/angular-ui-grid/ui-grid.woff',
         'node_modules/angular-ui-grid/ui-grid.ttf',
         'node_modules/angular-material-data-table/dist/md-data-table.min.js',
+        'node_modules/angular-material-data-table/dist/md-data-table.min.js.map',
         'node_modules/angular-material-data-table/dist/md-data-table.min.css',
         'node_modules/ng-file-upload/dist/ng-file-upload.min.js',
-        'node_modules/angular-resource/angular-resource.min.js'])
+        'node_modules/ng-file-upload/dist/ng-file-upload.min.js.map',
+        'node_modules/angular-resource/angular-resource.min.js',
+        'node_modules/angular-resource/angular-resource.min.js.map'])
         .pipe(gulp.dest('client/app/assets/vendor'));
 });
 

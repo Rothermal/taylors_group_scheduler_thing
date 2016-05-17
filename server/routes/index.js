@@ -8,4 +8,9 @@ router.get('/', function(req, res, next) {
   res.render('index', {title: 'Interviewly'});
 });
 
+
+router.get('/*', function(request, response){
+  response.redirect('/');
+});
+
 module.exports = router;
