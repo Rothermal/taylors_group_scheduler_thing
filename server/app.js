@@ -70,7 +70,6 @@ app.use('/authenticate', authenticate);
 // use APIs
 app.use('/forgot', forgot);
 app.use('/reset', reset);
-app.use('/api/*', expressJwt({secret: process.env.SECRET || "devsecret"}));
 app.use('/api/profile', profile);
 app.use('/api/interviewer', interviewer);
 app.use('/api/student', student);
@@ -92,6 +91,7 @@ app.use('/api/event/archive', archiveEvent);
 app.use('/api/upload', upload);
 app.use('/api/event/interviewerWeight', interviewerWeight);
 app.use('/api/event/studentWeight', studentWeight);
+app.use('/api/*', expressJwt({secret: process.env.SECRET || "devsecret"}));
 app.use('/', index);
 
 //

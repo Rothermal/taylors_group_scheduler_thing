@@ -11,7 +11,7 @@ app.controller('registerOpen', ['$scope', '$mdDialog', '$http', function($scope,
     $scope.openRegister = function(ev){
         console.log('clicked should be open');
         $mdDialog.show({
-            //controller: 'registerOpen',
+            controller: 'registerOpen',
             templateUrl: 'views/partials/dialogs/register/register.html',
             parent: angular.element(document.body),
             targetEvent: ev,

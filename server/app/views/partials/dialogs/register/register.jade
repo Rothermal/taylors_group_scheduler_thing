@@ -21,7 +21,7 @@ md-dialog.student(flex="40")
                   .messageuser1(ng-message="required") *Required
             md-input-container
                label Confirm Password
-               input(ng-model="confirm" type="password" name="confirm" required data-password-verify="password")
+               input(ng-model="confirm" type="password" name="confirm" required data-password-verify="user.password")
                .messageuser(ng-messages="regForm.confirm.$error")
                   .div(ng-message="required") *Required
                   .div(ng-message="passwordVerify") Password doesn't match

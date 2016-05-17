@@ -41,6 +41,9 @@ var scheduler = {
     },
     //matches interviews
     match: function(interviewSlots, interviewers, students){
+
+        console.log(students,'students in matching function');
+
         var slots = scheduler.getSlots(interviewSlots);
         var l = slots.length;
         var schedule = {};
@@ -52,7 +55,7 @@ var scheduler = {
         interviewers.forEach(function(interviewer) {
             var currentInterviewer = interviewer.fName + ' - ' + interviewer.company;
             available[currentInterviewer] = {};
-            available[currentInterviewer] = students.map( (student) = student.fName + ' ' + student.lName );
+            available[currentInterviewer] = students.map( (student) = students.fName + ' ' + students.lName );
             available[currentInterviewer].company = interviewer.company;
             // randomize the array
             available[currentInterviewer] = shuffle.get(available[currentInterviewer]);
