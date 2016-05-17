@@ -42,6 +42,7 @@ var archiveStudent = require('./api/student/archive');
 var archiveInterviewer = require('./api/interviewer/archive');
 var archiveEvent = require('./api/event/archive');
 var upload = require('./api/upload');
+var port = 3000;
 
 // view engine setup
 app.set('views', path.join(__dirname, './app/views'));
@@ -64,13 +65,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '..', 'client', 'app')));
 
 // use routes
-app.use('/', index);
-app.use('/authenticate', authenticate);
-//app.use('/forgot', forgot);
-//app.use('/reset', reset);
 
 // use APIs
-app.use('/api/*', expressJwt({secret: process.env.SECRET || "devsecret"}));
+app.use('/', index);
+app.use('/authenticate', authenticate);
 app.use('/api/profile', profile);
 app.use('/api/interviewer', interviewer);
 app.use('/api/student', student);
@@ -92,6 +90,9 @@ app.use('/api/event/archive', archiveEvent);
 app.use('/api/upload', upload);
 app.use('/api/event/interviewerWeight', interviewerWeight);
 app.use('/api/event/studentWeight', studentWeight);
+//app.use('/forgot', forgot);
+//app.use('/reset', reset);
+app.use('/api/*', expressJwt({secret: process.env.SECRET || "devsecret"}));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -129,5 +130,9 @@ app.use(function(err, req, res, next) {
   });
 });
 
+var server = app.listen(port,function(){
+  var port = server.address().port;
+  console.log('now open on port',port);
+});
 
 module.exports = app;

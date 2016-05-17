@@ -6,17 +6,17 @@ md-dialog.student(flex="40")
          .inputs
             md-input-container
                label Username
-               input(type="text" required name="username" ng-model="username")
+               input(type="text" required name="username" ng-model="user.username")
                .div(ng-messages="regForm.username.$error")
                   .div(ng-message="required") *Required
             md-input-container
                label Email
-               input(ng-model="email" type="text" name="email" required)
+               input(ng-model="user.email" type="text" name="email" required)
                .messageuser(ng-messages="regForm.email.$error")
                   .messageuser1(ng-message="required") *Required
             md-input-container
                label Password
-               input(ng-model="password" type="password" name="password" required)
+               input(ng-model="user.password" type="password" name="password" required)
                .messageuser(ng-messages="regForm.password.$error")
                   .messageuser1(ng-message="required") *Required
             md-input-container
@@ -26,5 +26,5 @@ md-dialog.student(flex="40")
                   .div(ng-message="required") *Required
                   .div(ng-message="passwordVerify") Password doesn't match
             .regbut(layout="row" layout-align="center center")
-               md-button.md-raised(ng-disabled="regForm.$invalid" ng-click="register(username, email, password)") Submit
+               md-button.md-raised(ng-disabled="regForm.$invalid" ng-click="register(user)") Submit
                md-button.md-raised.md-warn(ng-click="close()") Cancel

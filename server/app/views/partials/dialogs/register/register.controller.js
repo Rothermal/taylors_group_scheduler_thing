@@ -2,7 +2,7 @@
 /*
 Register dialog controller
  */
-app.controller('registerOpen', ['$scope', '$mdDialog', '$http', function($scope, $mdDialog){
+app.controller('registerOpen', ['$scope', '$mdDialog', '$http', function($scope, $mdDialog, $http){
 
     $scope.clicked = function(){
       console.log('clicked');
@@ -18,22 +18,29 @@ app.controller('registerOpen', ['$scope', '$mdDialog', '$http', function($scope,
             clickOutsideToClose: true
         });
     };
-    function register($scope, $http, $mdDialog) {
-        $scope.register = function(username, email, password){
-            console.log('hit post');
-            $http.post('/api/users', {
-                username: username,
-                email: email,
-                password: password
-            }).then(function(response){
-                console.log('posted',response);
-                if(response == 200) {
-                    $mdDialog.hide();
-                }
-            });
-        };
-        $scope.close = function(){
-            $mdDialog.hide();
-        };
-    }
+
+    $scope.register = function(user){
+        console.log('hit post',user);
+        $http.post('/api/users', {
+            username: user.username,
+            email: user.email,
+            password: user.password
+        }).then(function(response){
+            console.log('posted',response);
+            if(response == 200) {
+                $mdDialog.hide();
+            }
+        });
+    };
+    $scope.close = function(){
+        $mdDialog.hide();
+    };
+
+
 }]);
+
+//app.controller( 'register',['$scope','$mdDialog','$http',function ($scope, $http, $mdDialog) {
+//
+//
+//
+//}]);

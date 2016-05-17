@@ -4,6 +4,7 @@ var User = require('../models/users');
 
 /* POST USER CREATE*/
 router.post('/', function(req, res, next) {
+    console.log('request in post',req.body);
     if (req.body.username.length > 0 && req.body.email.length > 0 && req.body.password.length > 0) {
         var user = new User(req.body);
         user.save(function (err) {
