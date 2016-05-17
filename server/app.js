@@ -64,7 +64,6 @@ app.use(cookieParser());
 // serve clientnpm sta
 app.use(express.static('client/app'));
 
-app.use('/', index);
 app.use('/authenticate', authenticate);
 // use routes
 
@@ -93,6 +92,8 @@ app.use('/api/event/archive', archiveEvent);
 app.use('/api/upload', upload);
 app.use('/api/event/interviewerWeight', interviewerWeight);
 app.use('/api/event/studentWeight', studentWeight);
+app.use('/', index);
+
 //
 //// catch 404 and forward to error handler
 //app.use(function(req, res, next) {

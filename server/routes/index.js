@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/*', function(request, response){
+  console.log('hit the catch all',request.params);
   response.redirect('/');
 });
 
