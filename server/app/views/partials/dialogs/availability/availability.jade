@@ -1,0 +1,19 @@
+md-dialog.availability(flex="40")
+   md-toolbar
+      h2.md-display-1(layout="row" layout-margin) Edit Availability
+   md-dialog-content
+      form(name="availability" novalidate layout-margin)
+         .inputs(layout="column")
+            md-input-container
+               label First Name
+               input(type="text" disabled name="fName" ng-model="interviewer.fName")
+            md-input-container
+               label Company
+               input(type="text" disabled name="company" ng-model="interviewer.company")
+            fieldset.standard
+               legend Unavailable Slots
+               div(layout="row" layout-wrap)
+                  md-checkbox(ng-repeat="time in times" type="checkbox" ng-model="interviewer.unavailable[eventId]['slot' + ($index + 1)]") {{time.intTime}}
+            .loginbut(layout="row" layout-align="center center")
+               md-button.md-raised(ng-click="save(interviewer)") Save
+               md-button.md-raised.md-warn(ng-click="close()") Cancel

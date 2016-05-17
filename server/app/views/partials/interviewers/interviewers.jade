@@ -1,0 +1,54 @@
+md-content.md-default.eventBg(ng-controller="interviewers" layout="column")
+    md-card.md-whiteframe-5dp
+        md-data-table-toolbar.alternate.eventBg(ng-show="selected.length" layout-align="space-between")
+            h2.md-title {{selected.length}} {{selected.length > 1 ? 'interviewers' : 'interviewer'}} selected
+            div(flex)
+            md-button.md-icon-button(ng-click="archiveSelected(selected)")
+                md-icon archive
+                md-tooltip Archive
+            md-button.md-icon-button(ng-click="cancelSelected(selected)")
+                md-icon close
+                md-tooltip Cancel
+        md-data-table-toolbar.eventBg(ng-hide="filter.show || selected.length")
+            h2.md-title Interviewers
+            div(flex)
+            md-button.md-icon-button.md-default(ng-click="filter.show = true")
+                md-icon filter_list
+                md-tooltip Filter
+            md-button.md-icon-button.md-default(ng-controller="interviewer" ng-click="openInterviewer()")
+                md-icon add
+                md-tooltip Add
+            md-button.md-icon-button.md-default(ng-controller="uploads" ng-click="openUploads()")
+                md-icon file_upload
+                md-tooltip Upload
+        md-data-table-toolbar.eventBg(layout="row" layout-align="center center" ng-show="filter.show && !selected.length")
+            md-icon search
+            form(flex name="filter.form")
+                md-input-container
+                    label search
+                    input(type="text" ng-model="query.filter.$" ng-model-options="{debounce: 500}")
+            span(flex="70")
+            md-button.md-icon-button(ng-click="removeFilter()")
+                md-icon close
+        md-data-table-container.eventBg
+            table.md-primary.eventBg(md-data-table md-row-select="selected")
+                thead.eventBg(md-order="query.order")
+                    tr
+                        th(name="First Name" order-by="fName")
+                        th(name="Last Name" order-by="lName")
+                        th(name="Email" order-by="email")
+                        th(name="Company" order-by="company")
+                        th(name="Archive")
+                        th(name="Edit")
+                tbody.eventBg
+                    tr.eventBg(md-auto-select ng-repeat="interviewer in filtered | orderBy: query.order")
+                        td {{interviewer.fName}}
+                        td {{interviewer.lName}}
+                        td {{interviewer.email}}
+                        td {{interviewer.company}}
+                        td
+                            md-button.md-icon-button(ng-click="archive(interviewer)")
+                                md-icon archive
+                        td
+                            md-button.md-icon-button(ng-click="editInterviewer(interviewer._id)")
+                                md-icon edit

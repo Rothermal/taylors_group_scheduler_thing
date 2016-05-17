@@ -1,0 +1,29 @@
+md-dialog.student(flex="40")
+   md-toolbar
+      h2.md-display-1(layout="row" layout-margin="auto") Edit Student
+   md-dialog-content
+      form(name="editStudent" novalidate)
+         md-content
+            md-input-container
+               label First Name
+               input(ng-model="student.fName" name="fname" type="text" editable="true" required)
+               div(ng-messages="studentForm.fname.$error")
+                  div(ng-message="required") *Required
+            md-input-container
+               label Last Name
+               input(ng-model="student.lName" name="lname" type="text" required)
+               div(ng-messages="studentForm.lname.$error")
+                  div(ng-message="required") *Required
+            md-input-container
+               label Email
+               input(ng-model="student.email" name="email" type="text" required)
+               div(ng-messages="studentForm.email.$error")
+                  div(ng-message="required") *Required
+            md-input-container
+               label Cohort
+               input(ng-model="student.cohort" type="text" name="cohort" required)
+               div(ng-messages="studentForm.cohort.$error")
+                  div(ng-message="required") *Required
+            .loginbut(layout="row" layout-align="center center")
+               md-button.md-raised(ng-disabled="editStudent.$invalid" ng-click="edit(student)") Save
+               md-button.md-raised.md-warn(ng-click="close()") Cancel

@@ -1,0 +1,23 @@
+.welcome(ng-controller="addStudents" layout="column")
+    md-content.eventBg
+        md-card
+            md-data-table-toolbar.eventBg(ng-hide="selected.length")
+                h2.md-title Students
+            md-data-table-toolbar.alternate(ng-show="selected.length" layout-align="space-between")
+                h2.md-title {{selected.length}} {{selected.length > 1 ? 'students' : 'student'}} selected
+            md-data-table-container.eventBg
+                table.md-primary.eventBg(md-data-table)
+                    thead.eventBg(md-order="query.order")
+                        tr
+                            th(name="First Name" order-by="fName")
+                            th(name="Last Name" order-by="lName")
+                            th(name="Email" order-by="email")
+                            th(name="Remove From Event")
+                    tbody.eventBg
+                        tr(ng-repeat="student in students | orderBy: query.order")
+                            td {{student.fName}}
+                            td {{student.lName}}
+                            td {{student.email}}
+                            td
+                                md-button.md-icon-button(ng-click="remove(student)")
+                                    md-icon remove

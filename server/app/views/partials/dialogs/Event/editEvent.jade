@@ -1,0 +1,28 @@
+md-dialog.student(flex="40")
+   md-toolbar
+      h2.md-display-1(layout="row" layout-margin="auto") Edit Event
+   md-dialog-content
+      form(name="event" novalidate)
+         md-input-container
+            label Event Date
+            input(type="date" name="date" ng-model="event2.date" required)
+            div(ng-messages="event.date.$error")
+               div(ng-message="required") *Required
+         md-input-container
+            label Event Start Time
+            input(type="time" ng-model="event2.startTime" name="sTime" required format-date)
+            div(ng-messages="event.sTime.$error")
+               div(ng-message="required") *Required
+         md-input-container
+            label Event End Time
+            input(type="time" ng-model="event2.endTime" name="eTime" required format-date)
+            div(ng-messages="event.eTime.$error")
+               div(ng-message="required") *Required
+         .layout(layout-padding)
+            div(flex="10" layout layout-align="center center")
+               span.md-body-1 Interview Duration
+            md-slider.md-primary(flex md-discrete ng-model="event2.interviewDuration" min="15" max="35" aria-label="duration" step="5")
+            div(ng-messages="event.slotDur.$error")
+               div(ng-message="required") *Required
+         div(layout="row" layout-align="center center")
+            md-button.md-raised.md-primary(ng-disabled="newEvent.$invalid" ng-click="edit(event2)") Save

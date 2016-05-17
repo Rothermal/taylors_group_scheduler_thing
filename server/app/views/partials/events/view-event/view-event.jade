@@ -1,0 +1,28 @@
+.welcome(ng-controller="viewEventCtrl" layout="column")
+    .header(layout="row" layout-align="start center" flex)
+        md-subheader(class="md-primary")
+            h1.md-display-1 {{event.cohort}} {{event.type}}
+            span(flex)
+    md-tabs.md-primary(md-dynamic-height md-border-bottom)
+        md-tab(label="Event Details")
+            md-content.eventBg
+                .formlay(layout="row" layout-margin="auto")
+                    span(flex="20")
+                    .md-whiteframe-z2(layout="column" flex="60")
+                        form(name="new-event")
+                            p.md-body-1(layout="row" layout-margin="auto") Date: {{event.date}}
+                            p.md-body-1(layout="row" layout-margin="auto") Start time: {{event.startTime}}
+                            p.md-body-1(layout="row" layout-margin="auto") End time: {{event.endTime}}
+                            p.md-body-1(layout="row" layout-margin="auto") Interview duration: {{event.interviewDuration}}
+                            span(flex)
+                            md-button(ng-click="edit()") EDIT
+        md-tab(label="Schedule")
+            div(ng-include="'views/partials/events/schedule/schedule.html'")
+        md-tab(label="Students")
+            div(ng-include="'views/partials/events/event-students/event-students.html'")
+        md-tab(label="Student Ratings" ng-if="event.type == 'Career Day'")
+            div(ng-include="'views/partials/rankings/student-rankings.html'")
+        md-tab(label="Interviewers")
+            div(ng-include="'views/partials/events/event-interviewers/eventInterviewers.html'")
+        md-tab(label="Interviewer Ratings" ng-if="event.type == 'Career Day'")
+            div(ng-include="'views/partials/rankings/interviewer-rankings.html'")

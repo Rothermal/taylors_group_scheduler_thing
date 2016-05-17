@@ -1,0 +1,31 @@
+md-content.eventBg(ng-controller="ArchInterviewers" layout="column")
+   md-card.md-whiteframe-5dp
+      md-data-table-toolbar.eventBg.alternate(ng-show="selected.length" layout-align="space-between")
+         h2.md-title {{selected.length}} {{selected.length > 1 ? 'interviewers' : 'interviewer'}} selected
+         div(flex)
+         md-button.md-icon-button(ng-click="unArchiveSelected(selected)")
+            md-icon archive
+            md-tooltip Unarchive
+         md-button.md-icon-button(ng-click="cancelSelected(selected)")
+            md-icon close
+            md-tooltip Cancel
+      md-data-table-toolbar.md-primary.eventBg(ng-hide="selected.length")
+         h2.md-title Archived Interviewers
+      md-data-table-container
+         table.md-primary(md-data-table md-row-select="selected")
+            thead.eventBg(md-order="query.order")
+               tr
+                  th(name="First Name" order-by="fName")
+                  th(name="Last Name" order-by="lName")
+                  th(name="Email" order-by="email")
+                  th(name="Company" order-by="company")
+                  th(name="Unarchive")
+            tbody.eventBg
+               tr(md-auto-select ng-repeat="interviewer in interviewers | orderBy: query.order")
+                  td {{interviewer.fName}}
+                  td {{interviewer.lName}}
+                  td {{interviewer.email}}
+                  td {{interviewer.company}}
+                  td
+                     md-button.md-icon-button(ng-click="unarchive(interviewer)")
+                        md-icon.material-icons.md-dark archive

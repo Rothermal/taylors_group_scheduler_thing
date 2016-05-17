@@ -1,0 +1,44 @@
+md-dialog.interviewer(flex="40")
+   md-toolbar
+      h2.md-display-1(layout="row" layout-margin="auto") Add Interviewer
+   md-dialog-content
+      form(name="interviewerForm" novalidate)
+         .inputs(layout="column")
+            md-input-container
+               label First Name
+               input(type="text" name="fname" ng-model="interviewer.fName" required)
+               .messagename(ng-messages="interviewerForm.fname.$error")
+                  .messagename1(ng-message="required") *Required
+            md-input-container
+               label Last Name
+               input(type="text" name="lname" ng-model="interviewer.lName" required)
+               .messagename(ng-messages="interviewerForm.lname.$error")
+                  .messagename1(ng-message="required") *Required
+            md-input-container
+               label EMail
+               input(type="text" name="email" ng-model="interviewer.email" required)
+               .messagename(ng-messages="interviewerForm.email.$error")
+                  .messagename1(ng-message="required") *Required
+            md-input-container
+               label Title
+               input(type="text" name="title" ng-model="interviewer.title")
+               .messagetitle(ng-messages="interviewerForm.title.$error")
+                  .messagetitle1(ng-message="required") *Required
+            md-input-container
+               label Company
+               input(type="text" name="company" ng-model="interviewer.company" required)
+               .messagecompany(ng-messages="interviewerForm.company.$error")
+                  .messagecompany1(ng-message="required") *Required
+            md-input-container
+               label Company Link
+               input(type="text" name="url" ng-model="interviewer.url")
+               .messagelink(ng-messages="interviewerForm.link.$error")
+                  .messagelink1(ng-message="required") *Required
+            md-input-container
+               label Company Description
+               textarea(type="text" name="description" ng-model="interviewer.description")
+               .messagedesc(ng-messages="interviewerForm.description.$error")
+                  .messagedesc1(ng-message="required") *Required
+            .loginbut(layout="row" layout-align="center center")
+               md-button.md-raised(ng-disabled="interviewerForm.$invalid" ng-click="submit(interviewer)") Save
+               md-button.md-raised.md-warn(ng-click="close()") Cancel

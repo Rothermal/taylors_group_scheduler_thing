@@ -1,0 +1,32 @@
+{
+  "name": "Interviewly",
+  "description": "a web-based application for generating a comprehensive schedule for an interview event",
+  "main": "server/app.js",
+  "authors": [
+    "[object Object]",
+    "[object Object]",
+    "[object Object]",
+    "[object Object]"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "scheduling",
+    "interviews",
+    "prime",
+    "digital",
+    "academy"
+  ],
+  "homepage": "https://github.com/panoptican/prime_interviewly_app",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "pdfmake": "~0.1.20"
+  }
+}

@@ -1,0 +1,27 @@
+.formlay(layout="row" layout-margin="auto")
+    span(flex="20")
+    .md-whiteframe-z2(layout="column" flex="60" style="margin-top:50px")
+        form(name="profile" ng-controller="profile")
+            h2.md-primary.md-display-1(layout="row" layout-margin) Profile
+            p.md-body-1(layout="row" layout-margin) Update your Profile details below
+            md-content.eventBg(layout-margin)
+                md-input-container
+                    label Username
+                    input(type="text" ng-model="user.username" name="username")
+                md-input-container
+                    label Email
+                    input(type="text" ng-model="user.email" name="email")
+                md-input-container
+                    label Password
+                    input(ng-model="user.password" type="password" name="password" required)
+                md-input-container
+                    label Confirm Password
+                    input(ng-model="user.confirm" type="password" name="confirm" required data-password-verify="user.password")
+                    .div(ng-messages="profile.confirm.$error")
+                        .div(ng-message="passwordVerify") Password doesn't match
+                .savebut(layout="row" layout-align="center center")
+                    md-button.md-raised(ng-disabled="profile.$invalid" ng-click="save(user)") Save
+                        span(flex)
+                    md-button.md-raised.md-warn(href="/events") Cancel
+    span(flex="20")
+

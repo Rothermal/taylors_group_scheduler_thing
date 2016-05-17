@@ -1,0 +1,10 @@
+.welcome(ng-controller="eventSchedule" layout="column")
+    md-content.eventBg
+        md-card
+            md-data-table-toolbar.eventBg
+                h2.md-title Schedule
+                md-button.md-raised(ng-click="generate()") Generate
+                md-button.md-raised(ng-click="saveEvent()") Save
+            md-data-table-container.eventBg
+                .formlay(layout="row" layout-margin="auto" layout-align="center center")
+                    div(id="grid1" ui-grid="gridOptions" ui-grid-edit ui-grid-exporter ui-grid-pinning class="schedGrid" flex="90")

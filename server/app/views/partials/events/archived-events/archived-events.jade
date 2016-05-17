@@ -1,0 +1,16 @@
+.welcome
+   .interviewersheader(layout="row" layout-align="start center" layout-margin="auto" flex="auto")
+      md-subheader(class="md-primary")
+         h1.md-display-1 Archived Events
+   .gridheader(layout="row" layout-align="center center" layout-margin="auto" layout-padding="auto" flex="auto")
+      div(ng-controller="archivedEventsCtrl", flex="auto", ng-cloak="" class="eventsCtrl" ng-app="app")
+         md-grid-list(md-cols-gt-md="6", md-row-height-gt-md="1:1", md-row-height="4:3", md-gutter="8px", md-gutter-gt-sm="4px")
+            md-grid-tile(ng-repeat="tile in tiles", md-rowspan="{{tile.span.row}}", md-colspan="{{tile.span.col}}", md-colspan-sm="1", ng-class="tile.background")
+               h4.md-subhead(layout="column" layout-align="start center" layout-margin="auto" layout-padding="auto" flex="auto") {{tile.cohort}} {{tile.type}}
+                  md-button(ng-click="submit()" aria-label)
+                     img(src="assets/img/logo@0.5x.png" alt="" width="75" height="75" layout-margin="auto")
+               md-grid-tile-footer(layout="row" layout-align="end center" flex="auto")
+                  .buttonheader
+                  md-button.md-icon-button.md-warn(ng-controller="archivedEventsModal" ng-click="deleteEvent(tile._id)" aria-label="delete")
+                     md-icon.i.material-icons(aria-label="delete") delete
+

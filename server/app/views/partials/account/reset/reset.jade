@@ -1,0 +1,17 @@
+.forgot(layout="row" layout-margin="auto")
+   span(flex="30")
+   .md-whiteframe-z2(layout="column" flex="40" style="margin:50px 0; ")
+      form(name="reset" ng-controller="reset")
+         md-content(layout-padding)
+            md-input-container
+               label Password
+               input(type="password" name="password" ng-model="password" required)
+            md-input-container
+               label Confirm Password
+               input(type="password" ng-model="confirm" name="confirm" required data-password-verify="password")
+               .div(ng-messages="reset.confirm.$error")
+                  .div(ng-message="passwordVerify") Password doesn't match
+
+            .forgotBut(layout="row" layout-align="center center")
+         md-button.md-raised(ng-disabled="reset.$invalid" ng-click="changePass(password, confirm, headers.host.token)") Submit
+   span(flex="30")

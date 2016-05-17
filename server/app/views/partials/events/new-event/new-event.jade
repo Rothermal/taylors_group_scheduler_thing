@@ -1,0 +1,43 @@
+.formlay(layout="row" layout-margin ng-controller="newEventCtrl")
+   span(flex="20")
+   .md-whiteframe-z2(layout="column" flex="60" style="margin-top:50px")
+      md-toolbar.md-primary
+         h2.md-display-1(layout="row" layout-margin="auto") Create New Event
+      md-.eventBg(layout-margin)
+         form(name="newEvent" novalidate)
+            md-input-container
+               label Event Type
+               md-select(name="eventType" ng-model="event.type" required)
+                  md-option(value="Mock Interviews") Mock Interviews
+                  md-option(value="Career Day") Career Day
+               div(ng-messages="newEvent.eventType.$error")
+                  div(ng-message="required") *Required
+            md-input-container
+               label Cohort
+               input(ng-model="event.cohort" name="cohort" type="text" required)
+               div(ng-messages="newEvent.cohort.$error")
+                  div(ng-message="required") *Required
+             md-input-container
+               label Event Date
+               input(type="date" name="date" ng-model="event.date" required)
+               div(ng-messages="newEvent.date.$error")
+                  div(ng-message="required") *Required
+            md-input-container
+               label Event Start Time
+               input(type="time" ng-model="event.startTime" name="sTime" required format-date)
+               div(ng-messages="newEvent.sTime.$error")
+                  div(ng-message="required") *Required
+            md-input-container
+               label Event End Time
+               input(type="time" ng-model="event.endTime" name="eTime" required format-date)
+               div(ng-messages="newEvent.eTime.$error")
+                  div(ng-message="required") *Required
+            .layout(layout-padding)
+               div(flex="10" layout layout-align="center center")
+                  span.md-body-1 Interview Duration
+               md-slider.md-primary(flex md-discrete ng-model="event.interviewDuration" min="15" max="35" aria-label="duration" step="5")
+               div(ng-messages="newEvent.slotDur.$error")
+                  div(ng-message="required") *Required
+            div(layout="row" layout-align="center center")
+               md-button.md-raised.md-primary(ng-disabled="newEvent.$invalid" ng-click="submit(event)") Save New Event
+   span(flex="20")

@@ -1,0 +1,46 @@
+doctype html
+html.no-js(ng-app="app")
+    head
+        meta(charset="utf-8")
+        title Interviewly
+        meta(name="description", content="width=device-width")
+        meta(name="viewport", content="initial-scale=1, maximum-scale=1")
+
+        // Stylesheets
+        link(rel='stylesheet' href='assets/vendor/angular-material.min.css')
+        link(rel="stylesheet" href="assets/vendor/md-data-table.min.css")
+        link(rel='stylesheet' href='assets/css/styles.min.css')
+
+        // Google Fonts
+        link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic')
+        link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+
+        // All your base are belong to us
+        base(href='/')
+
+        // JS Libraries
+        script(src='assets/vendor/angular.min.js')
+        script(src='assets/vendor/underscore-min.js')
+        script(src='assets/vendor/moment.min.js')
+        script(src='assets/vendor/pdfmake.min.js')
+        script(src='assets/vendor/vfs_fonts.js')
+
+        // Angular Material Dependencies
+        script(src='assets/vendor/angular-route.min.js')
+        script(src='assets/vendor/angular-animate.min.js')
+        script(src='assets/vendor/angular-aria.min.js')
+        script(src='assets/vendor/angular-material.min.js')
+        script(src='assets/vendor/angular-messages.min.js')
+        script(src="assets/vendor/md-data-table.min.js")
+        script(src="assets/vendor/ng-file-upload.min.js")
+        script(src="assets/vendor/angular-resource.min.js")
+
+        // UI Grid Dependencies
+        script(src='assets/vendor/ui-grid.min.js')
+
+        // Core App
+        script(src='assets/js/app.min.js')
+
+    body
+        block content
+

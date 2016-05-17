@@ -1,0 +1,20 @@
+body {
+    background: #F5F5F5;
+}
+
+.md-subheader, .formlay, .eventBg, .header {
+    background: #F5F5F5;
+}
+
+.eventsCtrl .gray {
+    background: #E6E6E6;
+}
+
+.breakCell {
+    color: darkred;
+    font-weight: bold;
+}
+
+.alternate {
+    background: lightblue;
+}

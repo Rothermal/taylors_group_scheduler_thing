@@ -1,0 +1,23 @@
+md-dialog
+    md-toolbar(layout="row" layout-align="center center")
+        h2.md-display-1 Add Interviewers To Event
+        div(flex)
+        md-button.md-icon-button(ng-click="close()")
+            md-icon close
+    md-dialog-content(layout-margin layout-padding)
+        md-data-table-container
+            table(md-data-table)
+                thead
+                    tr
+                        th(name="First Name")
+                        th(name="Last Name")
+                        th(name="Company")
+                        th(name="Add")
+                tbody
+                    tr(md-auto-select ng-repeat="interviewer in interviewers" ng-if="interviewer.unadded")
+                        td {{interviewer.fName}}
+                        td {{interviewer.lName}}
+                        td {{interviewer.company}}
+                        td
+                            md-button.md-icon-button(ng-click="add(interviewer)")
+                                md-icon add

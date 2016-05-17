@@ -1,0 +1,31 @@
+md-content.eventBg(ng-controller="archStudents" layout="column")
+   md-card.md-whiteframe-5dp
+      md-data-table-toolbar.eventBg.alternate(ng-show="selected.length" layout-align="space-between")
+         h2.md-title {{selected.length}} {{selected.length > 1 ? 'students' : 'student'}} selected
+         div(flex)
+         md-button.md-icon-button(ng-click="unArchiveSelected(selected)")
+            md-icon archive
+            md-tooltip Unarchive
+         md-button.md-icon-button(ng-click="cancelSelected(selected)")
+            md-icon close
+            md-tooltip Cancel
+      md-data-table-toolbar.md-primary.eventBg(ng-hide="filter.show || selected.length")
+         h2.md-title Archived Students
+      md-data-table-container
+         table.md-primary(md-data-table md-row-select="selected")
+            thead.eventBg(md-order="query.order")
+               tr
+                  th(name="First Name" order-by="fName")
+                  th(name="Last Name" order-by="lName")
+                  th(name="Email" order-by="email")
+                  th(name="Cohort" order-by="cohort")
+                  th(name="Unarchive")
+            tbody.eventBg
+               tr(md-auto-select ng-repeat="student in students | orderBy: query.order")
+                  td {{student.fName}}
+                  td {{student.lName}}
+                  td {{student.email}}
+                  td {{student.cohort}}
+                  td
+                     md-button.md-icon-button(ng-click="unarchive(student)")
+                        md-icon.material-icons.md-dark archive

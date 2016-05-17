@@ -1,0 +1,10 @@
+.forgot(layout="row" layout-margin="auto")
+   span(flex="30")
+   .md-whiteframe-z2(layout="column" flex="40" style="margin:50px 0; ")
+      form(name="forgot" ng-controller="sendEmail")
+         md-content(layout-padding)
+            md-input-container
+               label Email
+               input(ng-model="email" type="text" required)
+         .forgotBut(layout="row" layout-align="center center")
+            md-button.md-raised(ng-click="send(email)") Submit

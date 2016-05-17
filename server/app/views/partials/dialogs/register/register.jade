@@ -1,0 +1,30 @@
+md-dialog.student(flex="40")
+   md-toolbar
+      h2.md-display-1(layout="row" layout-margin="auto") Registration
+   md-dialog-content
+      form(name="regForm" novalidate)
+         .inputs
+            md-input-container
+               label Username
+               input(type="text" required name="username" ng-model="username")
+               .div(ng-messages="regForm.username.$error")
+                  .div(ng-message="required") *Required
+            md-input-container
+               label Email
+               input(ng-model="email" type="text" name="email" required)
+               .messageuser(ng-messages="regForm.email.$error")
+                  .messageuser1(ng-message="required") *Required
+            md-input-container
+               label Password
+               input(ng-model="password" type="password" name="password" required)
+               .messageuser(ng-messages="regForm.password.$error")
+                  .messageuser1(ng-message="required") *Required
+            md-input-container
+               label Confirm Password
+               input(ng-model="confirm" type="password" name="confirm" required data-password-verify="password")
+               .messageuser(ng-messages="regForm.confirm.$error")
+                  .div(ng-message="required") *Required
+                  .div(ng-message="passwordVerify") Password doesn't match
+            .regbut(layout="row" layout-align="center center")
+               md-button.md-raised(ng-disabled="regForm.$invalid" ng-click="register(username, email, password)") Submit
+               md-button.md-raised.md-warn(ng-click="close()") Cancel

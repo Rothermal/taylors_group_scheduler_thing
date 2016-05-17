@@ -1,0 +1,31 @@
+.welcome(ng-controller="eventInterviewers" layout="column")
+    md-content.eventBg
+        md-card
+            md-data-table-toolbar.eventBg
+                h2.md-title Interviewers
+                div(flex)
+                md-button.md-icon-button(ng-click="addInterviewerDialog()")
+                    md-icon add
+                        md-tooltip Add Interviewers
+            md-data-table-container.eventBg
+                table.md-primary(md-data-table)
+                    thead.eventBg(md-order="query.order")
+                        tr.eventBg
+                            th(name="First Name" order-by="fName")
+                            th(name="Last Name" order-by="lName")
+                            th(name="Email" order-by="email")
+                            th(name="Company" order-by="company")
+                            th(name="Remove")
+                            th(name="Availability")
+                    tbody.eventBg
+                        tr(ng-repeat="interviewer in interviewers | orderBy: query.order")
+                            td {{interviewer.fName}}
+                            td {{interviewer.lName}}
+                            td {{interviewer.email}}
+                            td {{interviewer.company}}
+                            td
+                                md-button.md-icon-button(ng-click="remove(interviewer)")
+                                    md-icon remove
+                            td
+                                md-button.md-icon-button(ng-click="editAvailability(interviewer._id)")
+                                    md-icon event_available
