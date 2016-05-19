@@ -47,6 +47,7 @@ var Event = {
     },
     update: function(query, body, callback){
         EventModel.findOneAndUpdate(query, body, {new: true}, function(err, doc){
+            console.log('body',body);
             if(err){
                 console.log(err);
             } else {

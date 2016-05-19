@@ -4,9 +4,12 @@
   */
 app.controller('newEventCtrl', ['$scope', '$http', '$location', '$filter', function($scope, $http, $location, $filter) {
     $scope.submit = function(event) {
-
-        event.startTime = $filter('date')(new Date(event.startTime), 'HH:mm');
-        event.endTime = $filter('date')(new Date(event.endTime), 'HH:mm');
+        //
+        //console.log('event.startTime before filter', event.startTime);
+        //
+        //event.startTime = $filter('date')(new Date(event.startTime), 'HH:mm');
+        //console.log('event.startTime', event.startTime);
+        //event.endTime = $filter('date')(new Date(event.endTime), 'HH:mm');
 
         $http({
             method: 'POST',

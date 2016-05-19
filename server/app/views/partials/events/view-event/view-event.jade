@@ -1,3 +1,5 @@
+
+h1 hey yall
 .welcome(ng-controller="viewEventCtrl" layout="column")
     .header(layout="row" layout-align="start center" flex)
         md-subheader(class="md-primary")
@@ -15,7 +17,7 @@
                             p.md-body-1(layout="row" layout-margin="auto") End time: {{event.endTime}}
                             p.md-body-1(layout="row" layout-margin="auto") Interview duration: {{event.interviewDuration}}
                             span(flex)
-                            md-button(ng-click="edit()") EDIT
+                            md-button(ng-click="edit(event.id)") EDIT
         md-tab(label="Schedule")
             div(ng-include="'views/partials/events/schedule/schedule.html'")
         md-tab(label="Students")

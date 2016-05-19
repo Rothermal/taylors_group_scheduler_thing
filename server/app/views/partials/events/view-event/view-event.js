@@ -1,8 +1,9 @@
 /*
  View events controller
  */
-app.controller('viewEventCtrl', ['$scope', '$mdDialog' ,'$http', '$filter', '$routeParams', '$rootScope', function($scope, $mdDialog, $http, $filter, $routeParams, $rootScope) {
+app.controller('viewEventCtrl', ['$scope', '$mdDialog' ,'$http', '$filter', '$routeParams', '$rootScope', 'eventDetails', function($scope, $mdDialog, $http, $filter, $routeParams, $rootScope, eventDetails) {
 
+    var EventDetails = eventDetails;
     var eventParam = $routeParams._id;
     $scope.eventId = eventParam;
 
@@ -17,7 +18,7 @@ app.controller('viewEventCtrl', ['$scope', '$mdDialog' ,'$http', '$filter', '$ro
             }   else {
                 tod = "AM";
             }
-            var startTime =  hour + ":" +newStart[1]+" "+tod;
+            //var startTime =  hour + ":" +newStart[1]+" "+tod;
 
             var end = (response.data.endTime);
             var newEnd = end.split(':');
@@ -28,7 +29,11 @@ app.controller('viewEventCtrl', ['$scope', '$mdDialog' ,'$http', '$filter', '$ro
             }   else {
                 etod = "AM";
             }
-            var endTime =  ehour + ":" +newEnd[1]+" "+etod;
+            //var endTime =  ehour + ":" +newEnd[1]+" "+etod;
+            var endTime = moment(response.data.endTime).format('LT');
+            var startTime = moment(response.data.startTime).format('LT');
+            //startTime = startTime.getHours() + ":" + startTime.getMinutes();
+
             $scope.fullEvent = response.data;
             $scope.event = {
                 id: response.data._id,
@@ -44,48 +49,21 @@ app.controller('viewEventCtrl', ['$scope', '$mdDialog' ,'$http', '$filter', '$ro
 
     getEvents();
 
-    $scope.edit = function() {
-        $http.get('/api/event/' + eventParam).then(function(response){
+    $scope.editEventControlled = {a: "I am controlled!"};
 
-            $scope.event2 = {
-                id: response.data._id,
-                cohort: response.data.cohort,
-                type: response.data.type,
-                date: $filter('date')(new Date(response.data.date), 'MM/dd/yy'),
-                startTime: response.data.startTime,
-                endTime: response.data.endTime,
-                interviewDuration: response.data.interviewDuration
-            };
+    var returnEvent = {};
+    $scope.id = '';
 
-            $mdDialog.show({
-                controller: editEvent,
-                locals: {
-                  items: $scope.event2
-                },
-                templateUrl: 'views/partials/dialogs/Event/editEvent.html',
-                parent: angular.element(document.body),
-                clickOutsideToClose: true
-            });
-        });
+    $scope.edit = eventDetails.edit;
+    $scope.event2 = EventDetails.returnEvent;
 
+    $scope.save = function (event) {
 
-        function editEvent($scope, $mdDialog, $http, items, $rootScope) {
-            var event = items;
-            $scope.close = function () {
+        $http.put('api/event?_id=' + event.id, event)
+            .then(function (response) {
+                $rootScope.$broadcast('getEvent');
                 $mdDialog.hide();
-            };
+            });
+    }
 
-            $scope.edit = function (edit) {
-                edit._id = event.id;
-                edit.startTime = $filter('date')(new Date(edit.startTime), 'HH:mm');
-                edit.endTime = $filter('date')(new Date(edit.endTime), 'HH:mm');
-
-                $http.put('api/event?_id=' + event.id, edit)
-                    .then(function (response) {
-                        $rootScope.$broadcast('getEvent');
-                        $mdDialog.hide();
-                    });
-            };
-        }
-    };
 }]);

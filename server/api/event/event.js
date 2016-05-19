@@ -73,6 +73,7 @@ router.delete('/', function(req, res, next){
 router.put('/', function(req, res, next){
     if(Object.keys(req.query).length > 0){
         Event.update(req.query, req.body, function(err, data){
+            console.log('req.body', req.body);
             if(err){
                 console.log(err);
                 next(err);

@@ -2,7 +2,8 @@
  Login controller
   */
 app.controller('login', ['$scope', '$http', '$location', '$mdToast', 'authService', function($scope, $http, $location, $mdToast, authService){
-    $scope.submit = function(user) {
+    $scope.user = {username: "u", password: "u"};
+        $scope.submit = function(user) {
         $http.post('/authenticate', user)
             .then(function(response){
                     //save json web token in session storage
