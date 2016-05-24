@@ -1,0 +1,25 @@
+//
+   Created by robbynewman on 5/23/16.
+md-dialog
+    md-toolbar(layout="row" layout-align="center center")
+        h2.md-display-1 Add Students To Event
+        div(flex)
+        md-button.md-icon-button(ng-click="close()")
+            md-icon close
+    md-dialog-content(layout-margin layout-padding)
+        md-data-table-container
+            table(md-data-table)
+                thead
+                    tr
+                        th(name="First Name")
+                        th(name="Last Name")
+                        th(name="Cohort")
+                        th(name="Add")
+                tbody
+                    tr(md-auto-select ng-repeat="student in students" ng-if="student.unadded")
+                        td {{student.fName}}
+                        td {{student.lName}}
+                        td {{student.cohort}}
+                        td
+                            md-button.md-icon-button(ng-click="add(student)")
+                                md-icon add

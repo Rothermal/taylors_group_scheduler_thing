@@ -37,7 +37,7 @@ app.config(['$routeProvider', '$locationProvider', '$mdThemingProvider', '$httpP
             templateUrl: 'views/partials/events/event-students/event-students.html'
         }).
         when('/event/event-interviewers?:eventId', {
-            templateUrl: 'views/partials/events/event-interviewers/event-interviewers.html'
+            templateUrl: 'views/partials/events/event-interviewers/eventInterviewers.html'
         }).
         when('/event/interviewersRank?:eventId', {
             templateUrl: 'views/partials/rankings/interviewer-rank.html'
