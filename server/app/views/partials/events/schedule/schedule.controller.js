@@ -6,6 +6,7 @@ app.controller('eventSchedule', ['$scope', '$http', '$routeParams', 'scheduleCon
 
     // event ID
     var eventParam = $routeParams._id;
+    console.log('eventParam',eventParam);
 
     // initialize schedule variables
     var hasSchedule;
@@ -48,14 +49,21 @@ app.controller('eventSchedule', ['$scope', '$http', '$routeParams', 'scheduleCon
         // schedule information
         hasSchedule = response.schedule;
         $scope.currentSchedule = response.schedule;
+        console.log('response.startTime',response.startTime);
+        console.log('response.slotLength',response.slotLength);
+        console.log('response.endTime',response.endTime);
 
         // push first time slot into time columns variable
         timeCol = [{intTime: moment(response.startTime, 'HH:mm').format('h:mm A')}];
+        console.log('timeCol',timeCol);
+
+       //timeCol = [{intTime: response.startTime}];
 
         // iterate over the remainder of time slots and push each into time columns variable
         var rowCount = response.slotCount;
         while (rowCount--){
             timeCol.push({intTime: moment(response.startTime, 'HH:mm').add((response.slotLength * (response.slotCount - rowCount)), 'minutes').format('h:mm A')});
+            //timeCol.push({intTime: response.startTime.add((response.slotLength * (response.slotCount - rowCount)), 'minutes').format('h:mm A')});
         }
 
         // pop off any extra time slots
@@ -94,6 +102,8 @@ app.controller('eventSchedule', ['$scope', '$http', '$routeParams', 'scheduleCon
         // push time slot column into UI Grid variables
         gridCols.push(timeColLabel);
         gridData.push(timeCol);
+        //console.log('gridData',gridData);
+        //console.log('gridCols',gridCols);
 
         $http.get('api/getSchedule?_id=' + eventParam).then(function (response) {
 
@@ -105,13 +115,14 @@ app.controller('eventSchedule', ['$scope', '$http', '$routeParams', 'scheduleCon
 
             // format the schedule
             var genSched = scheduleConfig.formatSchedule(uglySchedule, gridCols, gridData);
+            //console.log("genSched", genSched);
 
             // set UI Grid values to saved schedule
             $scope.gridOptions.columnDefs = genSched.cols;
             $scope.gridOptions.data = genSched.data;
         }).then(function() {
             $http.post('/api/event/saveSchedule?_id=' + eventParam, {_id: scheduleId}).then(function success(response) {
-                console.log(response);
+
             });
         });
     };
@@ -140,7 +151,7 @@ app.controller('eventSchedule', ['$scope', '$http', '$routeParams', 'scheduleCon
             });
 
             $http.put('api/event?_id=' + eventParam, {schedule: oldSchedule}).then(function(response){
-                console.log(response);
+                //console.log(response);
             });
         });
     };

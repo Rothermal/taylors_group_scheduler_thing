@@ -8,3 +8,4 @@ var Schedule = new Schema({
 var scheduleSchema = mongoose.model('schedule', Schedule);
 
 module.exports =  scheduleSchema;
+

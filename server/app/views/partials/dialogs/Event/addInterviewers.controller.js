@@ -12,11 +12,11 @@ app.controller('addInterviewers', ['$scope', '$http', '$mdDialog', 'items', '$ro
             .then(function(response){
                 interviewer.unadded = false;
                 $rootScope.$broadcast('eventInterviewers');
-            })
+            });
     };
 
     $scope.close = function(){
         $mdDialog.hide();
-    }
+    };
 
 }]);

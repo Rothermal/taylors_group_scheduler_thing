@@ -89,5 +89,5 @@ app.controller('editInterviewer', ['$scope', '$mdDialog', '$mdToast', 'items', '
 
  $scope.close = function(){
   $mdDialog.hide();
- }
+ };
 }]);

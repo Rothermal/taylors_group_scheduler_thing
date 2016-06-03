@@ -6,6 +6,8 @@ var Interviewers = require('../../db/interviewer');
 var Tools = require('../../lib/tools');
 var Schedule = require('../../db/schedule');
 var async = require('async');
+var moment = require('moment');
+
 
 router.get('/', function(req, res, next){
     async.waterfall([
@@ -31,7 +33,24 @@ router.get('/', function(req, res, next){
             })
         },
         function(event, students, interviewers, callback){
-            var duration = (parseInt(event.endTime) - parseInt(event.startTime)) * 60;
+            console.log("moment endTime", moment(event.endTime).format());
+
+            var start  = event.startTime;
+            var end = event.endTime;
+
+            var ms = moment(end,"DD/MM/YYYY HH:mm:ss").diff(moment(start,"DD/MM/YYYY HH:mm:ss"));
+            console.log('ms', ms);
+
+
+            var d = moment.duration(ms);
+            console.log('d', d);
+            var s = Math.floor(d.asHours()) + moment.utc(ms).format(":mm:ss");
+            console.log('s', s);
+
+            //var duration = moment.duration(end.diff(startTime));
+            //var hours = duration.asHours();
+
+            var duration = moment.duration(moment(event.endTime).diff(moment(event.startTime))).asMinutes();
             var slots = Math.floor(duration / event.interviewDuration);
             var b = {fName: 'Break', lName: ''};
             students.push(b);

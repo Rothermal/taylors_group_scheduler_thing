@@ -2,11 +2,13 @@
 /*
  Event details factory that parses out various information about the event
  */
+
+
 app.factory('eventDetails', ['$http','$mdDialog','$filter',  function($http, $mdDialog, $filter) {
     var returnEvent = {};
     var edit = function(eventParam) {
         //console.log('edit() doing something?');
-        console.log('eventid', eventParam);
+        //console.log('eventid', eventParam);
 
         //var id = function(){
         //    return '2';
@@ -51,8 +53,9 @@ app.factory('eventDetails', ['$http','$mdDialog','$filter',  function($http, $md
             return $http.get('api/event/' + eventParam).then(function success(response) {
                 var eventTime = {};
                 eventTime.schedule = response.data.schedule;
-                eventTime.startTime = response.data.startTime;
+                eventTime.startTime = moment(response.data.startTime, 'h:mm A').format('HH:mm');
                 eventTime.endTime = moment(response.data.endTime, 'h:mm A').format('HH:mm');
+
                 eventTime.eventLength = moment(eventTime.endTime, 'HH:mm').diff(moment(eventTime.startTime, 'HH:mm'), 'minutes');
                 eventTime.slotLength = moment.duration(response.data.interviewDuration, 'minutes').asMinutes();
                 eventTime.slotCount = parseInt(Math.floor(eventTime.eventLength/eventTime.slotLength).toFixed(0));

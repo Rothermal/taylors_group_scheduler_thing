@@ -31,7 +31,7 @@ app.factory('scheduleConfig', ['$http', function($http) {
 
                 // push the company and interviewer name into the column names array
                 // this will be the column header for a particular interviewer
-                gridCols.push({
+                gridCols.push({ 
                     name: item.company + ' / ' + item.fName,
                     field: item.company + '_' + item.fName,
                     enableColumnMenu: false,

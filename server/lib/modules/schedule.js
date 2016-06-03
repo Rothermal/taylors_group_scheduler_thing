@@ -2,6 +2,7 @@ var shuffle = require('./shuffle');
 var sort = require('./sortByNum');
 var match = require('hopcroft-karp');
 
+
 var scheduler = {
     //sort keys of schedule before returning object
     sortKeys: function(object){
@@ -31,6 +32,8 @@ var scheduler = {
     },
     //this populates an array with the required interview slots and randomizes the order
     getSlots: function(interviewSlots){
+        console.log('interviewSlots',interviewSlots);
+
         var array = [], i=1;
         while(interviewSlots--){
             array.push(i);
@@ -42,9 +45,11 @@ var scheduler = {
     //matches interviews
     match: function(interviewSlots, interviewers, students){
 
-        console.log(students,'students in matching function');
+
 
         var slots = scheduler.getSlots(interviewSlots);
+
+        console.log('slots',slots);
         var l = slots.length;
         var schedule = {};
         var counter = {};
@@ -52,16 +57,27 @@ var scheduler = {
         var maxInterviews = l - 2;
 
         // create the initial object of available pairs of interviewer / students
+        console.log('interviewers', interviewers);
         interviewers.forEach(function(interviewer) {
+
             var currentInterviewer = interviewer.fName + ' - ' + interviewer.company;
+            //console.log('currentInterview',currentInterviewer);
+            // console.log('students', students);
+
             available[currentInterviewer] = {};
-            available[currentInterviewer] = students.map( (student) = students.fName + ' ' + students.lName );
+            //console.log('available', available);
+            //console.log('available.currentInterview', available.currentInterviewer);
+
+            available[currentInterviewer] = students.map( function(student){
+                return student.fName + ' ' + student.lName
+            } );
             available[currentInterviewer].company = interviewer.company;
             // randomize the array
-            available[currentInterviewer] = shuffle.get(available[currentInterviewer]);
+            //available[currentInterviewer] = shuffle.get(available[currentInterviewer]);
         });
         
         // build the counter object for tracking student scheduled interviews
+
         students.forEach(function(student){
             var fullName = student.fName + ' ' + student.lName;
             counter[fullName] = {}; 
@@ -121,7 +137,7 @@ var scheduler = {
             }
             slots.splice(0, 1);
         }
-        console.log(counter);
+        console.log('counter',counter);
 
         // reformat the schedule to be the way the front end likes it (TODO refactor the front end but i'm tired)
         interviewers.forEach(function(interviewer){
